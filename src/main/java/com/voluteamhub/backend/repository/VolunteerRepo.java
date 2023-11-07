@@ -8,6 +8,9 @@ import org.springframework.context.annotation.Configuration;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import com.amazonaws.services.lambda.runtime.RequestHandler;
+import com.amazonaws.services.lambda.runtime.Context;
+
 
 public class VolunteerRepo {
     private final List<Volunteer> volunteers = new ArrayList<>();
