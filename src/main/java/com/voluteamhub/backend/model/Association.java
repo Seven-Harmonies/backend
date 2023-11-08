@@ -1,14 +1,22 @@
 package com.voluteamhub.backend.model;
 
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class Association {
+
     @Id
     @GeneratedValue
     private long id;
+    @ElementCollection
+    private List<String> photos;
+
     private String email;
     private String phone;
     private String photoUrl;
@@ -22,6 +30,14 @@ public class Association {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public List<String> getPhotos() {
+        return photos;
+    }
+
+    public void setPhotos(List<String> photos) {
+        this.photos = photos;
     }
 
     public String getEmail() {
