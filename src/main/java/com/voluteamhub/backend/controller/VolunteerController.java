@@ -42,6 +42,19 @@ public class VolunteerController {
         Volunteer newVolunteer = getVolunteerByCredentials(emailUsername, password);
         return volunteerRepository.getReferenceById(newVolunteer.getId());}
 
+    @PostMapping("/register")
+    public Volunteer registerVolunteer(String email, String lastName, String firstName, String phone, String userName, String photoUrl, String password) {
+        Volunteer v = new Volunteer();
+        v.setEmail(email);
+        v.setLastName(lastName);
+        v.setFirstName(firstName);
+        v.setUserName(userName);
+        v.setPhotoUrl(photoUrl);
+        v.setPassword(password);
+        v.setPhone(phone);
+        return volunteerRepository.save(v);
+    }
+
 
         /*List<Volunteer> listVolunteers = volunteerRepository.findAll();
         LoginValidator lv = new LoginValidator(emailUsername, password);

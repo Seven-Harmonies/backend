@@ -1,6 +1,7 @@
 package com.voluteamhub.backend.controller;
 
 import com.voluteamhub.backend.model.Association;
+import com.voluteamhub.backend.model.Volunteer;
 import com.voluteamhub.backend.repository.AssociationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,6 +37,17 @@ public class AssociationController {
         for (Association v : listAssociation)
             if (v.getEmail().equals(email) && v.getPassword().equals(password)) return v;
         return null;
+    }
+
+    @PostMapping("/register")
+    public Association registerAssociation(List<String> photos, String email, String phone, String photoUrl, String userName, String password, String name){
+        Association v = new Association();
+        v.setEmail(email);
+        v.setUserName(userName);
+        v.setPhotoUrl(photoUrl);
+        v.setPassword(password);
+        v.setPhone(phone);
+        return associationRepository.save(v);
     }
 
     @GetMapping("/login")
