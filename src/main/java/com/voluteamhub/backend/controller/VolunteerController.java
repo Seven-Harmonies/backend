@@ -36,7 +36,7 @@ public class VolunteerController {
     List<Volunteer> getVolunteers() {
         return volunteerRepository.findAll();
     }
-//fct de parcurgere de voluntari dupa email
+
     @GetMapping("/login")
     public Volunteer logIn(String emailUsername, String password) {
         Volunteer newVolunteer = getVolunteerByCredentials(emailUsername, password);
