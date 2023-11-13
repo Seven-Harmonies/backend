@@ -14,8 +14,6 @@ public class Association {
     @Id
     @GeneratedValue
     private long id;
-    @ElementCollection
-    private List<String> photos;
 
     private String email;
     private String phone;
@@ -30,14 +28,6 @@ public class Association {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public List<String> getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(List<String> photos) {
-        this.photos = photos;
     }
 
     public String getEmail() {

@@ -17,7 +17,6 @@ import java.util.Map;
 
 @RestController
 public class AssociationController {
-    private Map<String, Association> loggedInAssociations = new HashMap<String, Association>();
     @Autowired
     private AssociationRepository associationRepository;
 
@@ -40,7 +39,7 @@ public class AssociationController {
     }
 
     @PostMapping("/register")
-    public Association registerAssociation(List<String> photos, String email, String phone, String photoUrl, String userName, String password, String name){
+    public Association registerAssociation(String email, String phone, String photoUrl, String userName, String password, String name){
         Association v = new Association();
         v.setEmail(email);
         v.setUserName(userName);
@@ -89,15 +88,6 @@ public class AssociationController {
             }
         }
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("This user doesn't exist!");*/
-
-    @GetMapping("/logout")
-    public ResponseEntity<String> logout(String sessionId) {
-        if (loggedInAssociations.containsKey(sessionId)){
-            loggedInAssociations.remove(sessionId);
-            return ResponseEntity.ok("Logout successful!");
-        }
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("This user is not logged in!");
-    }
 
 }
 
