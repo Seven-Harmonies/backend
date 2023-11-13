@@ -27,7 +27,7 @@ public class VolunteerController {
         return null;
     }
 
-    @PostMapping("/post")
+    @PostMapping("/postVolunteer")
     Volunteer newVolunteer(@RequestBody Volunteer newVolunteer) {
         return volunteerRepository.save(newVolunteer);
     }
@@ -37,12 +37,12 @@ public class VolunteerController {
         return volunteerRepository.findAll();
     }
 
-    @GetMapping("/login")
+    @GetMapping("/loginVolunteer")
     public Volunteer logIn(String emailUsername, String password) {
         Volunteer newVolunteer = getVolunteerByCredentials(emailUsername, password);
         return volunteerRepository.getReferenceById(newVolunteer.getId());}
 
-    @PostMapping("/register")
+    @PostMapping("/registerVolunteer")
     public Volunteer registerVolunteer(String email, String lastName, String firstName, String phone, String userName, String photoUrl, String password) {
         Volunteer v = new Volunteer();
         v.setEmail(email);
@@ -92,7 +92,7 @@ public class VolunteerController {
     }*/
 
 
-    @GetMapping("/logout")
+    @GetMapping("/logoutVolunteer")
     public ResponseEntity<String> logout(String sessionId) {
         if (loggedInVolunteers.containsKey(sessionId)){
             loggedInVolunteers.remove(sessionId);
