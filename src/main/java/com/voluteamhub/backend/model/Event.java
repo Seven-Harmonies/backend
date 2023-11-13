@@ -17,7 +17,6 @@ public class Event {
     private String description;
     private String photoUrl;
     private LocalDate eventDate; /*aaaa-ll-zz*/
-    private List<Volunteer> volunteerList;
 
     public long getId() {
         return id;
@@ -59,11 +58,5 @@ public class Event {
         this.eventDate = eventDate;
     }
 
-    public List<Volunteer> getVolunteerList() {
-        return volunteerList;
-    }
 
-    public void setVolunteerList(List<Volunteer> volunteerList) {
-        this.volunteerList = volunteerList;
-    }
 }

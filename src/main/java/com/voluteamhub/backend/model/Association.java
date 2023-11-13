@@ -17,7 +17,8 @@ public class Association {
 
     private String email;
     private String phone;
-    private String photoUrl;
+    @ElementCollection
+    private List<String> photoes;
     private String userName;
     private String password;
     private String name;
@@ -46,12 +47,12 @@ public class Association {
         this.phone = phone;
     }
 
-    public String getPhotoUrl() {
-        return photoUrl;
+    public List<String> getPhotoes() {
+        return photoes;
     }
 
-    public void setPhotoUrl(String photoUrl) {
-        this.photoUrl = photoUrl;
+    public void setPhotoes(List<String> photoes) {
+        this.photoes = photoes;
     }
 
     public String getUserName() {

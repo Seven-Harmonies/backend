@@ -20,12 +20,12 @@ public class AssociationController {
     @Autowired
     private AssociationRepository associationRepository;
 
-    @PostMapping("/post")
+    @PostMapping("/postAssociation")
     Association newAssociation (@RequestBody Association newAssociation) {
         return associationRepository.save(newAssociation);
     }
 
-    @GetMapping("/getassociation")
+    @GetMapping("/getAssociation")
     List<Association> getAssociations() {
         return associationRepository.findAll();
     }
@@ -38,18 +38,18 @@ public class AssociationController {
         return null;
     }
 
-    @PostMapping("/register")
-    public Association registerAssociation(String email, String phone, String photoUrl, String userName, String password, String name){
+    @PostMapping("/registerAssociation")
+    public Association registerAssociation(String email, String phone, List<String> photoes, String userName, String password, String name){
         Association v = new Association();
         v.setEmail(email);
         v.setUserName(userName);
-        v.setPhotoUrl(photoUrl);
         v.setPassword(password);
         v.setPhone(phone);
+        v.setPhotoes(photoes);
         return associationRepository.save(v);
     }
 
-    @GetMapping("/login")
+    @GetMapping("/loginAssociation")
     public Association logIn(String emailUsername, String password) {
         Association newAssociation = getAssociationByCredentials(emailUsername, password);
         return associationRepository.getReferenceById(newAssociation.getId());}
