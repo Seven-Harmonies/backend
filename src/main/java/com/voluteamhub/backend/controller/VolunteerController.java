@@ -5,25 +5,36 @@ import com.voluteamhub.backend.repository.VolunteerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
+@RequestMapping("/api")
+@CrossOrigin
 public class VolunteerController {
     private Map<String, Volunteer> loggedInVolunteers = new HashMap<>();
     @Autowired
     private VolunteerRepository volunteerRepository;
 
-    public Volunteer getVolunteerByCredentials(String email, String password){
+    public Volunteer getVolunteerByCredentials(String username, String password){
+        System.out.println("Inainte de findAll");
         List<Volunteer> listVolunteers = volunteerRepository.findAll();
-        for (Volunteer v : listVolunteers)
-            if (v.getEmail().equals(email) && v.getPassword().equals(password)) return v;
+        System.out.println("Dupa find all");
+        System.out.println(listVolunteers.get(0).getId());
+        for (Volunteer v : listVolunteers){
+            System.out.println("username param: " + username + " username v: " + v.getUser_name());
+            System.out.println("password param: " + password + " password v: " + v.getPassword());
+
+            if (v.getUser_name().equals(username) && v.getPassword().equals(password)){
+                System.out.println(v);
+                return v;
+            }
+        }
+
         return null;
     }
 
@@ -36,20 +47,21 @@ public class VolunteerController {
     List<Volunteer> getVolunteers() {
         return volunteerRepository.findAll();
     }
-
-    @GetMapping("/loginVolunteer")
-    public Volunteer logIn(String emailUsername, String password) {
-        Volunteer newVolunteer = getVolunteerByCredentials(emailUsername, password);
-        return volunteerRepository.getReferenceById(newVolunteer.getId());}
+    @PostMapping("/loginVolunteer")
+    public Optional<Volunteer> logIn(@RequestBody Map<String, String> credentials) {
+        String username = credentials.get("username");
+        String password = credentials.get("password");
+        Volunteer newVolunteer = getVolunteerByCredentials(username, password);
+        return volunteerRepository.findById(newVolunteer.getId());}
 
     @PostMapping("/registerVolunteer")
     public Volunteer registerVolunteer(String email, String lastName, String firstName, String phone, String userName, String photoUrl, String password) {
         Volunteer v = new Volunteer();
         v.setEmail(email);
-        v.setLastName(lastName);
-        v.setFirstName(firstName);
-        v.setUserName(userName);
-        v.setPhotoUrl(photoUrl);
+        v.setLast_name(lastName);
+        v.setFirst_name(firstName);
+        v.setUser_name(userName);
+        v.setPhoto_url(photoUrl);
         v.setPassword(password);
         v.setPhone(phone);
         return volunteerRepository.save(v);

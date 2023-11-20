@@ -45,7 +45,7 @@ public class AssociationController {
         v.setUserName(userName);
         v.setPassword(password);
         v.setPhone(phone);
-        v.setPhotoes(photoes);
+        v.setPhotos(photoes);
         return associationRepository.save(v);
     }
 
