@@ -18,6 +18,18 @@ public class Volunteer {
         private String photo_url;
         private String password;
 
+        public Volunteer(String email, String last_name, String first_name, String phone, String user_name, String photo_url, String password) {
+                this.email = email;
+                this.last_name = last_name;
+                this.first_name = first_name;
+                this.phone = phone;
+                this.user_name = user_name;
+                this.photo_url = photo_url;
+                this.password = password;
+        }
+
+        public Volunteer(){}
+
         public long getId() {
                 return id;
         }

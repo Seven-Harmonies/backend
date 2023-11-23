@@ -6,16 +6,16 @@ import com.voluteamhub.backend.repository.AssociationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
+@RequestMapping("/api")
+@CrossOrigin
 public class AssociationController {
     @Autowired
     private AssociationRepository associationRepository;
@@ -31,28 +31,36 @@ public class AssociationController {
     }
 
 
-    public Association getAssociationByCredentials(String email, String password){
+    public Association getAssociationByCredentials(String username, String password){
         List<Association> listAssociation = associationRepository.findAll();
         for (Association v : listAssociation)
-            if (v.getEmail().equals(email) && v.getPassword().equals(password)) return v;
+            if (v.getUserName().equals(username) && v.getPassword().equals(password)) return v;
         return null;
     }
 
     @PostMapping("/registerAssociation")
-    public Association registerAssociation(String email, String phone, List<String> photoes, String userName, String password, String name){
-        Association v = new Association();
-        v.setEmail(email);
-        v.setUserName(userName);
-        v.setPassword(password);
-        v.setPhone(phone);
-        v.setPhotos(photoes);
-        return associationRepository.save(v);
+    public Optional<Association> registerAssociation(@RequestBody Map<String,String> credentials){
+        String username = credentials.get("username");
+        String password = credentials.get("password");
+        String email = credentials.get("email");
+        String phone = credentials.get("phone");
+        String photos = credentials.get("photos");
+        String name = credentials.get("name");
+        Association newAssociation = new Association(email,phone,photos,username,password,name);
+        return Optional.of(associationRepository.save(newAssociation));
     }
 
-    @GetMapping("/loginAssociation")
+    @PostMapping("/loginAssociation")
+    public Optional<Association> logIn(@RequestBody Map<String, String> credentials) {
+        String username = credentials.get("username");
+        String password = credentials.get("password");
+        Association newAssociation = getAssociationByCredentials(username, password);
+        return associationRepository.findById(newAssociation.getId());}
+
+    /*@GetMapping("/loginAssociation")
     public Association logIn(String emailUsername, String password) {
         Association newAssociation = getAssociationByCredentials(emailUsername, password);
-        return associationRepository.getReferenceById(newAssociation.getId());}
+        return associationRepository.getReferenceById(newAssociation.getId());}*/
 
 
         /*List<Association> listAssociations = associationRepository.findAll();
