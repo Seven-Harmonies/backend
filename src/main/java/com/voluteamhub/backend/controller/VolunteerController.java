@@ -57,6 +57,7 @@ public class VolunteerController {
     @PostMapping("/registerVolunteer")
     public Volunteer registerVolunteer(String email, String lastName, String firstName, String phone, String userName, String photoUrl, String password) {
         Volunteer v = new Volunteer();
+
         v.setEmail(email);
         v.setLast_name(lastName);
         v.setFirst_name(firstName);
