@@ -17,11 +17,21 @@ public class Association {
 
     private String email;
     private String phone;
-    @ElementCollection
-    private List<String> photos;
+    private String photos;
     private String userName;
     private String password;
     private String name;
+
+    public Association(String email, String phone, String photos, String userName, String password, String name) {
+        this.email = email;
+        this.phone = phone;
+        this.photos = photos;
+        this.userName = userName;
+        this.password = password;
+        this.name = name;
+    }
+
+    public Association(){}
 
     public long getId() {
         return id;
@@ -47,11 +57,11 @@ public class Association {
         this.phone = phone;
     }
 
-    public List<String> getPhotos() {
+    public String getPhotos() {
         return photos;
     }
 
-    public void setPhotos(List<String> photos) {
+    public void setPhotos(String photos) {
         this.photos = photos;
     }
 
