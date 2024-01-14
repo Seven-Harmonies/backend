@@ -2,7 +2,6 @@ package com.voluteamhub.backend.model;
 
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,23 +15,28 @@ public class Association {
 
     private String email;
     private String phone;
-    private String photos;
     private String userName;
     private String password;
+
+    @ElementCollection
+    @CollectionTable(name = "association_photos", joinColumns = @JoinColumn(name = "association_id"))
+    @Column(name = "photos")
+    private List<String> photos;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    public Association(String email, String phone, String photos, String userName, String password, String name) {
+    public Association() {
+
+    }
+
+    public Association(String email, String phone, String username, String password, String name) {
         this.email = email;
         this.phone = phone;
-        this.photos = photos;
-        this.userName = userName;
+        this.userName = username;
         this.password = password;
         this.name = name;
     }
-
-    public Association(){}
 
     public long getId() {
         return id;
@@ -56,14 +60,6 @@ public class Association {
 
     public void setPhone(String phone) {
         this.phone = phone;
-    }
-
-    public String getPhotos() {
-        return photos;
-    }
-
-    public void setPhotos(String photos) {
-        this.photos = photos;
     }
 
     public String getUserName() {
