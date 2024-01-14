@@ -1,18 +1,17 @@
 package com.voluteamhub.backend.model;
 
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "association")
 public class Association {
 
     @Id
     @GeneratedValue
+    @Column(name = "id")
     private long id;
 
     private String email;
@@ -20,6 +19,8 @@ public class Association {
     private String photos;
     private String userName;
     private String password;
+
+    @Column(name = "name", nullable = false)
     private String name;
 
     public Association(String email, String phone, String photos, String userName, String password, String name) {
