@@ -23,9 +23,6 @@ public class Post {
     @JoinColumn(name = "organization_id", nullable = false)
     private Association author;
 
-    @Column(name = "timestamp", nullable = false)
-    private LocalDateTime timestamp;
-
     public Long getId() {
         return id;
     }
@@ -50,11 +47,3 @@ public class Post {
         this.author = author;
     }
 
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
-    }
-}
