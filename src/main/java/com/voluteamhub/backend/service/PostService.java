@@ -19,7 +19,6 @@ public class PostService {
 
     public Post createPost(Post post) {
         // Set the timestamp and other necessary fields
-        post.setTimestamp(LocalDateTime.now());
         return postRepository.save(post);
     }
 }

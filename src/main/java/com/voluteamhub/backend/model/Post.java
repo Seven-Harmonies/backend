@@ -46,4 +46,5 @@ public class Post {
     public void setAuthor(Association author) {
         this.author = author;
     }
+}
 
