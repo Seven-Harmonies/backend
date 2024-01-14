@@ -14,7 +14,7 @@ public class PostService {
     private PostRepository postRepository;
 
     public List<Post> getAllPosts() {
-        return postRepository.findAllByOrderByTimestampDesc();
+        return postRepository.findAll();
     }
 
     public Post createPost(Post post) {
