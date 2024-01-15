@@ -9,7 +9,7 @@ import java.util.Objects;
 public class Volunteer {
         @Id
         @GeneratedValue
-        private long id;
+        private Long id;
         private String email;
         private String last_name;
         private String first_name;

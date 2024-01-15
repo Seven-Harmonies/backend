@@ -1,14 +1,11 @@
 package com.voluteamhub.backend.controller;
 
 import com.voluteamhub.backend.model.Association;
-import com.voluteamhub.backend.model.Volunteer;
 import com.voluteamhub.backend.repository.AssociationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -44,9 +41,8 @@ public class AssociationController {
         String password = credentials.get("password");
         String email = credentials.get("email");
         String phone = credentials.get("phone");
-        String photos = credentials.get("photos");
         String name = credentials.get("name");
-        Association newAssociation = new Association(email,phone,photos,username,password,name);
+        Association newAssociation = new Association(email, phone, username, password, name);
         return Optional.of(associationRepository.save(newAssociation));
     }
 

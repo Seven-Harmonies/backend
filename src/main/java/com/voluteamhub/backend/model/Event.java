@@ -12,7 +12,7 @@ public class Event {
 
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     private String name;
     private String description;
     private String photoUrl;
