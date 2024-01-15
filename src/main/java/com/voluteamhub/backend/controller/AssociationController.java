@@ -57,6 +57,14 @@ public class AssociationController {
         Association newAssociation = getAssociationByCredentials(username, password);
         return associationRepository.findById(newAssociation.getId());}
 
+    @GetMapping("/loginHandleAssociation")
+    public boolean loginHandleAssociation(@RequestBody Map<String, String> credentials){
+        String username = credentials.get("username");
+        String password = credentials.get("password");
+        return getAssociationByCredentials(username, password) != null;
+    }
+
+
     /*@GetMapping("/loginAssociation")
     public Association logIn(String emailUsername, String password) {
         Association newAssociation = getAssociationByCredentials(emailUsername, password);

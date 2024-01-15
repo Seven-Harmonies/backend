@@ -47,6 +47,14 @@ public class VolunteerController {
     List<Volunteer> getVolunteers() {
         return volunteerRepository.findAll();
     }
+
+    @GetMapping("/loginHandleVolunteer")
+    public boolean loginHandleVolunteer(@RequestBody Map<String, String> credentials){
+        String username = credentials.get("username");
+        String password = credentials.get("password");
+        return getVolunteerByCredentials(username, password) != null;
+    }
+
     @PostMapping("/loginVolunteer")
     public Optional<Volunteer> logIn(@RequestBody Map<String, String> credentials) {
         String username = credentials.get("username");
