@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "association")
 public class Association {
 
     @Id
@@ -19,7 +18,6 @@ public class Association {
     private String password;
 
     @ElementCollection
-    @CollectionTable(name = "association_photos", joinColumns = @JoinColumn(name = "association_id"))
     @Column(name = "photos")
     private List<String> photos;
 

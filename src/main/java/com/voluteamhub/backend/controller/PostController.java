@@ -11,11 +11,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/posts")
+@CrossOrigin("*")
 public class PostController {
     @Autowired
     private PostService postService;
 
-    @GetMapping
+    @GetMapping("/getPosts")
     public List<Post> getAllPosts() {
         return postService.getAllPosts();
     }
