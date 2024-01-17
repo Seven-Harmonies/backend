@@ -1,6 +1,7 @@
 package com.voluteamhub.backend.controller;
 
 import com.voluteamhub.backend.model.Association;
+import com.voluteamhub.backend.model.Volunteer;
 import com.voluteamhub.backend.repository.AssociationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

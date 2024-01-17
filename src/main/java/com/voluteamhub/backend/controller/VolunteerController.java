@@ -52,7 +52,9 @@ public class VolunteerController {
     public boolean loginHandleVolunteer(@RequestBody Map<String, String> credentials){
         String username = credentials.get("username");
         String password = credentials.get("password");
-        return getVolunteerByCredentials(username, password) != null;
+        if (getVolunteerByCredentials(username, password) != null)
+            return true;
+        return false;
     }
 
     @PostMapping("/loginVolunteer")
@@ -63,20 +65,7 @@ public class VolunteerController {
         return volunteerRepository.findById(newVolunteer.getId());}
 
     @PostMapping("/registerVolunteer")
-    public Volunteer registerVolunteer(String email, String lastName, String firstName, String phone, String userName, String photoUrl, String password) {
-        Volunteer v = new Volunteer();
-
-        v.setEmail(email);
-        v.setLast_name(lastName);
-        v.setFirst_name(firstName);
-        v.setUser_name(userName);
-        v.setPhoto_url(photoUrl);
-        v.setPassword(password);
-        v.setPhone(phone);
-        return volunteerRepository.save(v);
-    }
-
-    public Optional<Volunteer> registerVolunteer(@RequestBody Map<String,String> credentials){
+    public Optional<Volunteer> registerVolunteer(@RequestBody Map<String,String> credentials) {
         String username = credentials.get("username");
         String password = credentials.get("password");
         String email = credentials.get("email");
@@ -87,6 +76,18 @@ public class VolunteerController {
         Volunteer newVolunteer = new Volunteer(email,lastname,firstname,phone,username,photourl,password);
         return Optional.of(volunteerRepository.save(newVolunteer));
     }
+
+    /*public Optional<Volunteer> registerVolunteer(@RequestBody Map<String,String> credentials){
+        String username = credentials.get("username");
+        String password = credentials.get("password");
+        String email = credentials.get("email");
+        String firstname = credentials.get("firstname");
+        String lastname = credentials.get("lastname");
+        String phone = credentials.get("phone");
+        String photourl = credentials.get("photourl");
+        Volunteer newVolunteer = new Volunteer(email,lastname,firstname,phone,username,photourl,password);
+        return Optional.of(volunteerRepository.save(newVolunteer));
+    }*/
 
     @GetMapping("/logout")
     public ResponseEntity<String> logout(String sessionId) {
