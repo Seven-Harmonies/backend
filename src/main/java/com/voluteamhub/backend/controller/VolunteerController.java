@@ -38,6 +38,14 @@ public class VolunteerController {
         return null;
     }
 
+    public Volunteer getVolunteerByUsername(String username){
+        List<Volunteer> volunteerList = volunteerRepository.findAll();
+        for (Volunteer v : volunteerList){
+            if(v.getUser_name().equals(username)) return v;
+        }
+        return null;
+    }
+
     @PostMapping("/postVolunteer")
     Volunteer newVolunteer(@RequestBody Volunteer newVolunteer) {
         return volunteerRepository.save(newVolunteer);

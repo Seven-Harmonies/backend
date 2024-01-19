@@ -6,7 +6,8 @@ import java.util.Objects;
 
 @Entity
 public class EventVolunteers {
-    @EmbeddedId
+    @Id
+    @GeneratedValue
     EventVolunteersKey id;
 
     @ManyToOne
@@ -18,6 +19,16 @@ public class EventVolunteers {
     @MapsId("volunteerId")
     @JoinColumn(name = "volunteer_id")
     Volunteer volunteer;
+
+    public EventVolunteers(Event event, Volunteer volunteer) {
+        this.event = event;
+        this.volunteer = volunteer;
+    }
+
+    public EventVolunteers() {
+
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
