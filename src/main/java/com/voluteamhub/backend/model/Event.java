@@ -30,6 +30,21 @@ public class Event {
 
     private int participanti;
 
+    public Event(String name, String description, String photoUrl, LocalDate eventDate, String location, String images, String category, String organizer, int participanti) {
+        this.name = name;
+        this.description = description;
+        this.photoUrl = photoUrl;
+        this.eventDate = eventDate;
+        this.location = location;
+        this.images = images;
+        this.category = category;
+        this.organizer = organizer;
+        this.participanti = participanti;
+    }
+
+    public Event() {
+    }
+
     public int getParticipanti() {
         return participanti;
     }
