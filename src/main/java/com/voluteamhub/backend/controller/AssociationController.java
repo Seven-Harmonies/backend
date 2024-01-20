@@ -1,12 +1,13 @@
 package com.voluteamhub.backend.controller;
 
 import com.voluteamhub.backend.model.Association;
-import com.voluteamhub.backend.model.Volunteer;
+
 import com.voluteamhub.backend.repository.AssociationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -48,11 +49,18 @@ public class AssociationController {
     }
 
     @PostMapping("/loginAssociation")
-    public Optional<Association> logIn(@RequestBody Map<String, String> credentials) {
+    public ResponseEntity<Association> logIn(@RequestBody Map<String, String> credentials) {
         String username = credentials.get("username");
         String password = credentials.get("password");
+
         Association newAssociation = getAssociationByCredentials(username, password);
-        return associationRepository.findById(newAssociation.getId());}
+
+        if (newAssociation != null) {
+            return ResponseEntity.ok(associationRepository.findById(newAssociation.getId()).orElse(null));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
 
     @GetMapping("/loginHandleAssociation")
     public boolean loginHandleAssociation(@RequestBody Map<String, String> credentials){

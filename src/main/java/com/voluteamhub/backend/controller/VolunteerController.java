@@ -66,11 +66,18 @@ public class VolunteerController {
     }
 
     @PostMapping("/loginVolunteer")
-    public Optional<Volunteer> logIn(@RequestBody Map<String, String> credentials) {
+    public ResponseEntity<Volunteer> logIn(@RequestBody Map<String, String> credentials) {
         String username = credentials.get("username");
         String password = credentials.get("password");
+
         Volunteer newVolunteer = getVolunteerByCredentials(username, password);
-        return volunteerRepository.findById(newVolunteer.getId());}
+
+        if (newVolunteer != null) {
+            return ResponseEntity.ok(volunteerRepository.findById(newVolunteer.getId()).orElse(null));
+        } else {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
 
     @PostMapping("/registerVolunteer")
     public Optional<Volunteer> registerVolunteer(@RequestBody Map<String,String> credentials) {
