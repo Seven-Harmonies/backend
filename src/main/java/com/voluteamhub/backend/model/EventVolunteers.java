@@ -7,18 +7,16 @@ import java.util.Objects;
 @Entity
 public class EventVolunteers {
     @Id
-    @GeneratedValue
-    EventVolunteersKey id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
-    @MapsId("eventId")
     @JoinColumn(name = "event_id")
-    Event event;
+    private Event event;
 
     @ManyToOne
-    @MapsId("volunteerId")
     @JoinColumn(name = "volunteer_id")
-    Volunteer volunteer;
+    private Volunteer volunteer;
 
     public EventVolunteers(Event event, Volunteer volunteer) {
         this.event = event;
@@ -37,16 +35,17 @@ public class EventVolunteers {
         return Objects.equals(id, that.id) && Objects.equals(event, that.event) && Objects.equals(volunteer, that.volunteer);
     }
 
+
     @Override
     public int hashCode() {
         return Objects.hash(id, event, volunteer);
     }
 
-    public EventVolunteersKey getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(EventVolunteersKey id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
